@@ -9,11 +9,11 @@ export const login = async (req, res) => {
         where: { username },
     });
     if (!user) {
-        res.status(401).json({ message: 'No user found' });
+        res.status(401);
     }
     const passwordIsValid = await bcrypt.compare(password, user?.password || "");
     if (!passwordIsValid) {
-        res.status(401).json({ message: 'No password found' });
+        res.status(401);
     }
     const secretKey = process.env.JWT_SECRET_KEY || '';
     const token = jwt.sign({ username }, secretKey, { expiresIn: '10h' });
