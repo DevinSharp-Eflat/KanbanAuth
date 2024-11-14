@@ -1,4 +1,3 @@
-import axios from "axios";
 import { UserLogin } from "../interfaces/UserLogin";
 
 const login = async (userInfo: UserLogin) => {
