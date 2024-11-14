@@ -3,7 +3,7 @@ export const authenticateToken = (req, res, next) => {
     // TODO: verify the token exists and add the user data to the request object
     const authCombine = req.headers.authorization;
     if (!authCombine) {
-        return res.status(401).json({ message: 'no token found' });
+        res.status(401);
     }
     else {
         const token = authCombine.split(" ")[1];
@@ -16,5 +16,5 @@ export const authenticateToken = (req, res, next) => {
             return next();
         });
     }
-    return res.status(401).json({ message: 'no token found' });
+    res.status(401);
 };

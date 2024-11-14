@@ -10,7 +10,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   const authCombine = req.headers.authorization
 
   if(!authCombine) {
-    return res.status(401).json({ message: 'no token found'});
+    res.status(401);
   }
 
   else {
@@ -26,5 +26,5 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       return next();
     })
   }
-  return res.status(401).json({ message: 'no token found'});
+  res.status(401);
 };
