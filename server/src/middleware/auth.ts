@@ -7,9 +7,23 @@ interface JwtPayload {
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   // TODO: verify the token exists and add the user data to the request object
-  const token = req.headers.authorization
+  const authCombine = req.headers.authorization
 
-  if(!token) {
-    
+  if(!authCombine) {
+    return res.status(401).json({ message: 'no token found'});
+  }
+
+  else {
+    const token = authCombine.split(" ")[1];
+
+    const sKey = process.env.JWT_SECRET_KEY || "";
+
+    jwt.verify(token, sKey, (err, user) => {
+      if(err){
+        return res.status(401).json({ message: "error"});
+      }
+      req.user = user as JwtPayload;
+      return next();
+    })
   }
 };
