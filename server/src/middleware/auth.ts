@@ -26,4 +26,5 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       return next();
     })
   }
+  return res.status(401).json({ message: 'no token found'});
 };
