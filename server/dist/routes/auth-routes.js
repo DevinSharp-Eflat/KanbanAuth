@@ -18,6 +18,7 @@ export const login = async (req, res) => {
     }
     const secretKey = process.env.JWT_SECRET_KEY || '';
     const token = jwt.sign({ username }, secretKey, { expiresIn: '10h' });
+    console.log(token);
     return res.json({ token });
 };
 const router = Router();

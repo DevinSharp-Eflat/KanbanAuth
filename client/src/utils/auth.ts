@@ -10,16 +10,13 @@ class AuthService {
 
   loggedIn() {
     // TODO: return a value that indicates if the user is logged in
-    const token = this.getToken();
-    return !this.isTokenExpired(token);
+    return !this.isTokenExpired();
   }
   
-  isTokenExpired(token: string) {
+  isTokenExpired() {
     // TODO: return a value that indicates if the token is expired
     try{
-      console.log(token);
-      const jwtToken = JSON.parse(token);
-      console.log(jwtToken);
+      const jwtToken = this.getProfile();
       const current = Date.now()
       return jwtToken.exp == undefined || current >= jwtToken.exp * 1000
     }
