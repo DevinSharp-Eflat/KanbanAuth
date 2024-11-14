@@ -16,13 +16,16 @@ class AuthService {
   
   isTokenExpired(token: string) {
     // TODO: return a value that indicates if the token is expired
-    const jwtToken = JSON.parse(localStorage.getItem(token)!);
-    const current = Date.now()
-    if (  jwtToken!.exp == undefined || current >= jwtToken!.exp * 1000) {
-      return false;
+    try{
+      console.log(token);
+      const jwtToken = JSON.parse(token);
+      console.log(jwtToken);
+      const current = Date.now()
+      return jwtToken.exp == undefined || current >= jwtToken.exp * 1000
     }
-    else  
+    catch (error) {
       return true;
+    }
   }
 
   getToken(): string {
