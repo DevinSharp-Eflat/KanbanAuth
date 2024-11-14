@@ -12,12 +12,12 @@ export const login = async (req: Request, res: Response) => {
   });
 
   if(!user) {
-    res.status(401).json({ message: 'No user found'});
+    res.status(401);
   }
 
   const passwordIsValid = await bcrypt.compare(password, user?.password || "");
   if(!passwordIsValid) {
-    res.status(401).json({ message: 'No password found'});
+    res.status(401);
   }
 
   const secretKey = process.env.JWT_SECRET_KEY || '';
