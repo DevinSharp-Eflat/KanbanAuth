@@ -7,6 +7,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
     const users = await User.findAll({
       attributes: { exclude: ['password'] }
     });
+    console.log(users);
     res.json(users);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
