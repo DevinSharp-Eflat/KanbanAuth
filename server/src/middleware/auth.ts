@@ -9,11 +9,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   // TODO: verify the token exists and add the user data to the request object
   const authCombine = req.headers.authorization
 
-  if(!authCombine) {
-    res.status(401);
-  }
-
-  else {
+  if(authCombine) {
     const token = authCombine.split(" ")[1];
 
     const sKey = process.env.JWT_SECRET_KEY || "";
@@ -26,5 +22,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       return next();
     })
   }
-  res.status(401);
+  else{
+    res.status(401);
+  }
 };
